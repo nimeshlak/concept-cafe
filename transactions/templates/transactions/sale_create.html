@@ -86,23 +86,29 @@
                         </div>
                         <div class="mb-3">
                             <label for="sub_total" class="form-label">Subtotal</label>
-                            <input name="sub_total" type="number" class="form-control" id="sub_total" aria-label="Subtotal" required>
+                            <input name="sub_total" type="number" class="form-control" id="sub_total" aria-label="Subtotal" >
                         </div>
-                        <div class="mb-3">
-                            <label for="tax_percentage" class="form-label">Tax Inclusive (%)</label>
-                            <input name="tax_percentage" type="number" class="form-control" id="tax_percentage" aria-label="Tax Inclusive" value="0" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="tax_amount" class="form-label">Tax Amount</label>
-                            <input name="tax_amount" type="number" class="form-control" id="tax_amount" aria-label="Tax Amount" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="grand_total" class="form-label">Grand Total</label>
-                            <input name="grand_total" type="number" class="form-control" id="grand_total" aria-label="Grand Total" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="amount_paid" class="form-label">Amount Payed</label>
-                            <input name="amount_paid" type="number" class="form-control" id="amount_paid" aria-label="Amount Paid" required>
+                        <div class="d-none">
+                            <div class="mb-3">
+                                <label for="tax_percentage" class="form-label">Tax Inclusive (%)</label>
+                                <input name="tax_percentage" type="number" class="form-control" id="tax_percentage" aria-label="Tax Inclusive" value="0" >
+                            </div>
+                            <div class="mb-3">
+                                <label for="tax_amount" class="form-label">Tax Amount</label>
+                                <input name="tax_amount" type="number" class="form-control" id="tax_amount" aria-label="Tax Amount" >
+                            </div>
+                            <div class="mb-3">
+                                <label for="grand_total" class="form-label">Grand Total</label>
+                                <input name="grand_total" type="number" class="form-control" id="grand_total" aria-label="Grand Total" >
+                            </div>
+                            <div class="mb-3">
+                                <label for="amount_paid" class="form-label">Amount Payed</label>
+                                <input name="amount_paid" type="number" class="form-control" id="amount_paid" aria-label="Amount Paid" >
+                            </div>
+                            <div class="mb-3">
+                                <label for="amount_change" class="form-label">Amount change</label>
+                                <input name="amount_change" type="number" class="form-control" id="amount_change" aria-label="Amount change"  >
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-success w-100">Create Sale</button>
                     </div>
@@ -432,7 +438,7 @@
             // Gather sale details
             var amountPaid = parseFloat($('input[name="amount_paid"]').val());
             var grandTotal = parseFloat($('input[name="grand_total"]').val());
-            var amountChange = roundTo(amountPaid - grandTotal, 2);
+            var amountChange = 0.0
 
             // Gather sale details
             var formData = {
@@ -445,14 +451,8 @@
             };
 
             // Check if amount_change is present
-            if (isNaN(amountChange)) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'Amount change is required!'
-                });
-                return;
-            }
+            
+            
 
             // Get CSRF token
             var csrftoken = $('input[name="csrfmiddlewaretoken"]').val();

@@ -65,7 +65,7 @@ def export_sales_to_excel(request):
             sale.tax_amount,
             sale.tax_percentage,
             sale.amount_paid,
-            sale.amount_change
+            sale.amount_change,
         ])
 
     # Set up the response to send the file
@@ -153,11 +153,18 @@ class SaleDetailView(LoginRequiredMixin, DetailView):
     model = Sale
     template_name = "transactions/saledetail.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        sale = self.get_object()
+        context["sale_items"] = SaleDetail.objects.filter(sale=sale)
+        return context
+
 
 def SaleCreateView(request):
     context = {
         "active_icon": "sales",
         "customers": [c.to_select2() for c in Customer.objects.all()]
+
     }
 
     if request.method == 'POST':
@@ -182,9 +189,7 @@ def SaleCreateView(request):
                     "sub_total": float(data["sub_total"]),
                     "grand_total": float(data["grand_total"]),
                     "tax_amount": float(data.get("tax_amount", 0.0)),
-                    "tax_percentage": float(data.get("tax_percentage", 0.0)),
-                    "amount_paid": float(data["amount_paid"]),
-                    "amount_change": float(data["amount_change"]),
+                    "tax_percentage": float(data.get("tax_percentage", 0.0))
                 }
 
                 # Use a transaction to ensure atomicity

@@ -3,57 +3,59 @@
 
 {% block content %}
 <div class="container">
-        <div class="card">
-            <div class="row p-3">
-                <div class="col-md-8">
-                    <table class="table table-borderless">
-                        <thead>
-                            <span class="h4">Profile Information</span class="h4">
-                            <a class="btn btn-outline-success btn-sm float-end" href="{% url 'user-profile-update' %}">Edit profile</a>
-                            <hr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">username</th>
-                                <td>{{ user.username }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Staff role</th>
-                                <td>
-                                    <span class="badge badge-pill bg-soft-success text-success me-2">
-                                    {% if user.profile.role == 'AD' %}
-                                    Admin
-                                    {% elif user.profile.role == 'EX' %}
-                                    Executive
-                                    {% else %}
-                                    Operative
-                                    {% endif %}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">First name</th>
-                                <td>{{ user.profile.first_name }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Last name</th>
-                                <td>{{ user.profile.last_name }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Email</th>
-                                <td>{{ user.email }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Phone</th>
-                                <td>{{ user.profile.telephone }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-4">
-                    <img class="rounded-pill img-fluid" src="{{ user.profile.profile_picture.url }}" alt="profile-image">
-                </div>
-            </div>
+  <div class="card">
+    <div class="row p-3">
+      <div class="col-md-8">
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="h4 mb-0">Profile Information</span>
+          <a class="btn btn-outline-success btn-sm" href="{% url 'user-profile-update' %}">Edit profile</a>
         </div>
-</div>
+        <hr>
 
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <th scope="row">Username</th>
+              <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Staff Role</th>
+              <td>
+                <span class="badge bg-success text-light">
+                  {% if user.profile.role == 'AD' %}
+                    Admin
+                  {% elif user.profile.role == 'EX' %}
+                    Executive
+                  {% else %}
+                    Operative
+                  {% endif %}
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">First Name</th>
+              <td>{{ user.profile.first_name }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Last Name</th>
+              <td>{{ user.profile.last_name }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Email</th>
+              <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Phone</th>
+              <td>{{ user.profile.telephone }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-md-4 d-flex align-items-center justify-content-center">
+        <img class="rounded-pill img-fluid" src="{{ user.profile.profile_picture.url }}" alt="Profile image">
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

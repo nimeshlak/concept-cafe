@@ -1,16 +1,82 @@
-{% extends "store/base.html" %} {% block title %}Confirm delete{% endblock %}
+{% extends "store/base.html" %}
+{% block title %}Confirm delete{% endblock %}
+
 {% block content %}
-<div class="container pt-5">
+<style>
+    .container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+    }
+    form {
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 6px;
+        background-color: #fafafa;
+    }
+    fieldset {
+        border: none;
+        margin-bottom: 20px;
+    }
+    legend {
+        font-weight: 600;
+        font-size: 1.25rem;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #ccc;
+        margin-bottom: 20px;
+    }
+    h5 {
+        margin: 0;
+        font-weight: normal;
+    }
+    .button-group {
+        display: flex;
+        gap: 10px;
+    }
+    button, a.button {
+        padding: 6px 12px;
+        font-size: 0.875rem;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        border: 1px solid transparent;
+        min-width: 100px;
+        text-align: center;
+        user-select: none;
+    }
+    button {
+        background-color: #dc3545; /* red */
+        border-color: #dc3545;
+        color: white;
+        transition: background-color 0.3s;
+    }
+    button:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+    a.button {
+        background-color: #28a745; /* green */
+        border-color: #28a745;
+        color: white;
+    }
+    a.button:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+</style>
+
+<div class="container">
     <form method="POST">
         {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Delete Sale</legend>
-            <h5>Are you sure you want to delete staff "{{ object.username }}"</h5>
+        <fieldset>
+            <legend>Delete Sale</legend>
+            <h5>Are you sure you want to delete staff "{{ object.username }}"?</h5>
         </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-danger btn-sm" type="submit">Yes, Delete</button>
-            <a class="btn btn-outline-success btn-sm" href="{% url 'saleslist' %}">Cancel</a>
+        <div class="button-group">
+            <button type="submit">Yes, Delete</button>
+            <a href="{% url 'saleslist' %}" class="button">Cancel</a>
         </div>
     </form>
 </div>
-{% endblock content %}
+{% endblock %}

@@ -316,13 +316,12 @@
 <section class="receipt container-ticket">
     <div class="ticket">
         <div class="head-ticket">
-            <p class="x-bold">InventoryMS</p>
-            <p class="bold">Tom Mboya Street, Tudor</p>
-            <p class="bold">Tel: +2547 00 000000</p>
+            <p class="x-bold">Concept CAFE</p>
+            <p class="bold">Athurugiriya Road, Homagama</p>
+            <p class="bold">Tel: +94 41 22 40 123</p>
             <br>
-            <p class="bold">P.O BOX. 90420-80100 MSA</p>
             <p>Date: {{ sale.date_added|date:"Y/m/d H:i:s" }}</p>
-            <p>Receipt code: IMS{{ sale.id }}</p>
+            <p>Receipt code: CCI{{ sale.id }}</p>
             <div class="code-barre">
 				<span></span>
 				<span></span>
@@ -378,27 +377,35 @@
         </div>
         <div class="body-ticket">
             <div class="produits">
-                <div class="hr-sm"></div>
+                
+				<div class="col2">
+					{% for item in sale_items %}
+						<p class="prix"><b>{{ item.item.name }}</b> - {{ item.quantity }} × {{ item.price }} = {{ item.total_detail }}</p>
+					{% empty %}
+						<p>No items found for this sale.</p>
+					{% endfor %}
+				</div>
+				<div class="hr-sm"></div>
                 <div class="col2">
                     <p>Sub Total</p>
-                    <p class="prix"><b>Ksh {{ sale.sub_total }}</b></p>
+                    <p class="prix"><b>Rs. {{ sale.sub_total }}</b></p>
                 </div>
                 <br>
-                <div class="col2">
+                <div class="col2 d-none">
                     <p>Tax Amount</p>
                     <p class="prix"><b>Ksh {{ sale.tax_amount }}</b></p>
                 </div>
-                <div class="col2">
+                <div class="col2 d-none">
                     <p>Grand Total</p>
                     <p class="prix"><b>Ksh {{ sale.grand_total }}</b></p>
                 </div>
-                <div class="col2">
+                <div class="col2 d-none">
                     <p>Amount Paid</p>
                     <p class="prix"><b>Ksh {{ sale.amount_paid }}</b></p>
                 </div>
-                <div class="col2">
-                    <p>Balance</p>
-                    <p class="prix"><b>Ksh {{ sale.amount_change }}</b></p>
+                <div class="col2 ">
+                    <p>Items</p>
+                    <p class="prix"><b>Rs.{{ sale.amount_change }}</b></p>
                 </div>
             </div>
             <div class="hr-lg"></div>

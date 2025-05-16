@@ -1,55 +1,110 @@
-<!-- customer_form.html -->
 {% extends 'store/base.html' %}
 {% block content %}
-  <div class="container m-5">
-    <h1 class="mb-4">{% if form.instance.pk %}Edit{% else %}Create{% endif %} Customer</h1>
+  <style>
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .form-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input, textarea, select {
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 14px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+    }
+
+    .btn:hover {
+      background-color: #0069d9;
+    }
+
+    i {
+      margin-right: 5px;
+    }
+  </style>
+
+  <div class="container">
+    <h1>{% if form.instance.pk %}Edit{% else %}Create{% endif %} Customer</h1>
     <form method="post">
       {% csrf_token %}
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <div class="form-group">
-            {{ form.first_name.label_tag }}
-            {{ form.first_name }}
-          </div>
+      <div class="form-row">
+        <div class="form-group">
+          {{ form.first_name.label_tag }}
+          {{ form.first_name }}
         </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            {{ form.last_name.label_tag }}
-            {{ form.last_name }}
-          </div>
+        <div class="form-group">
+          {{ form.last_name.label_tag }}
+          {{ form.last_name }}
         </div>
       </div>
-      <div class="row mb-3">
-        <div class="col-md-12">
-          <div class="form-group">
-            {{ form.address.label_tag }}
-            {{ form.address }}
-          </div>
+
+      <div class="form-row">
+        <div class="form-group" style="flex: 1 1 100%;">
+          {{ form.address.label_tag }}
+          {{ form.address }}
         </div>
       </div>
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <div class="form-group">
-            {{ form.email.label_tag }}
-            {{ form.email }}
-          </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          {{ form.email.label_tag }}
+          {{ form.email }}
         </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            {{ form.phone.label_tag }}
-            {{ form.phone }}
-          </div>
+        <div class="form-group">
+          {{ form.phone.label_tag }}
+          {{ form.phone }}
         </div>
       </div>
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <div class="form-group">
-            {{ form.loyalty_points.label_tag }}
-            {{ form.loyalty_points }}
-          </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          {{ form.loyalty_points.label_tag }}
+          {{ form.loyalty_points }}
         </div>
       </div>
-      <button type="submit" class="btn btn-primary">
+
+      <button type="submit" class="btn">
         <i class="fas fa-save"></i> Save
       </button>
     </form>

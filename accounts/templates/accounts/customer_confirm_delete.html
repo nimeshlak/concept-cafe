@@ -1,8 +1,59 @@
 {% extends 'store/base.html' %}
 {% block content %}
-  <div class="container mt-5">
-    <h1 class="mb-4">Are you sure you want to delete "{{ object }}"?</h1>
-    <form method="post" class="mb-3">
+  <style>
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-right: 10px;
+      text-decoration: none;
+      font-size: 14px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background-color: #c82333;
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background-color: #5a6268;
+    }
+
+    i {
+      margin-right: 5px;
+    }
+  </style>
+
+  <div class="container">
+    <h1>Are you sure you want to delete "{{ object }}"?</h1>
+    <form method="post">
       {% csrf_token %}
       <button type="submit" class="btn btn-danger">
         <i class="fas fa-trash-alt"></i> Confirm

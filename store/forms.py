@@ -1,7 +1,6 @@
 from django import forms
 from .models import Item, Category, Delivery
 
-
 class ItemForm(forms.ModelForm):
     """
     A form for creating or updating an Item in the inventory.
@@ -19,7 +18,7 @@ class ItemForm(forms.ModelForm):
         ]
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'description': forms.Textarea(
+            'description': forms.TextInput(
                 attrs={
                     'class': 'form-control',
                     'rows': 2
@@ -41,6 +40,13 @@ class ItemForm(forms.ModelForm):
             ),
             'vendor': forms.Select(attrs={'class': 'form-control'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Set default values using the `initial` attribute
+        self.fields['description'].initial = 'N/A'
+        self.fields['price'].initial = 0  # Setting default price
+
 
 
 class CategoryForm(forms.ModelForm):

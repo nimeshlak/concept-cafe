@@ -123,20 +123,20 @@ class Purchase(models.Model):
     )
     order_date = models.DateTimeField(auto_now_add=True)
     delivery_date = models.DateTimeField(
-        blank=True, null=True, verbose_name="Delivery Date"
+        blank=True, null=True, default=0, verbose_name="Delivery Date"
     )
-    quantity = models.PositiveIntegerField(default=0)
+    quantity = models.PositiveIntegerField(default=1)
     delivery_status = models.CharField(
         choices=DELIVERY_CHOICES,
         max_length=1,
-        default="P",
+        default="S",
         verbose_name="Delivery Status",
     )
     price = models.DecimalField(
         max_digits=10,
         decimal_places=2,
         default=0.0,
-        verbose_name="Price per item (Ksh)",
+        verbose_name="Price per item (Rs.)",
     )
     total_value = models.DecimalField(max_digits=10, decimal_places=2)
 
@@ -147,7 +147,7 @@ class Purchase(models.Model):
         self.total_value = self.price * self.quantity
         super().save(*args, **kwargs)
         # Update the item quantity
-        self.item.quantity += self.quantity
+        self.item.quantity += self.quantity -self.quantity
         self.item.save()
 
     def __str__(self):
